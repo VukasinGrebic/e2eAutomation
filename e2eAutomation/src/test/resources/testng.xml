@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="SmokeSuite">
+    <test name="SmokeTests" preserve-order="true">
+        <classes>
+            <class name="com.e2e.RegistrationTest" />
+            <class name="com.e2e.LoginTest" />
+            <class name="com.e2e.ManageStudentTest" />
+        </classes>
+    </test>
+</suite>

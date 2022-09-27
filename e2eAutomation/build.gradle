@@ -1,0 +1,31 @@
+plugins {
+    id 'java'
+}
+
+group 'org.e2e'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.testng:testng:7.5'
+
+    implementation 'org.aeonbits.owner:owner-java8:1.0.12'
+
+    implementation 'org.seleniumhq.selenium:selenium-java:4.1.4'
+    implementation 'org.seleniumhq.selenium:selenium-remote-driver:4.1.4'
+    implementation 'io.github.bonigarcia:webdrivermanager:5.1.1'
+    implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.13.0'
+    implementation group: 'com.jayway.jsonpath', name: 'json-path', version: '2.6.0'
+    compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.12'
+
+    testImplementation group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.11'
+}
+
+test {
+    useTestNG()
+}
