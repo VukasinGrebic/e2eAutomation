@@ -27,7 +27,7 @@ public class ManageStudentTest extends TestBase {
     String studentsUrl = "http://wagner.wang/ContosoUniversity/Students";
 
     @Test(priority = 1,
-            enabled = true,
+            enabled = false,
             description = "Successful student creation")
     public void testStudentCreate(){
 
@@ -49,7 +49,7 @@ public class ManageStudentTest extends TestBase {
     }
 
     @Test(priority = 2,
-            enabled = true,
+            enabled = false,
             description = "Successful student record reading")
     public void testStudentRead(){
 
@@ -71,7 +71,7 @@ public class ManageStudentTest extends TestBase {
     }
 
     @Test(priority = 3,
-            enabled = true,
+            enabled = false,
             description = "Successful student record editing")
     public void testStudentEdit(){
 
@@ -90,7 +90,7 @@ public class ManageStudentTest extends TestBase {
     }
 
     @Test(priority = 4,
-            enabled = true,
+            enabled = false,
             description = "Successful student record deletion")
     public void testStudentDelete(){
 

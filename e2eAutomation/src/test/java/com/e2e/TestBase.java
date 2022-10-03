@@ -25,7 +25,7 @@ public abstract class TestBase {
 
     public static final SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd.HHmmss");
 
-    protected static final boolean DEMO = true;
+    protected static final boolean DEMO = false;
     protected static int demoWait = 2000;
 
     //protected String reportFolder = System.getProperty("user.dir") + "\\test-output\\SmokeSuite\\";
@@ -34,7 +34,7 @@ public abstract class TestBase {
 
     protected static WebDriver driver;
     protected static WebDriverWait wait;
-    protected int waitTime = 0;
+    protected int waitTime = 5;
 
     public static boolean dockingAllowed = ConfigurationManager.configuration().dockingAllowed();
     public static String dockSide = ConfigurationManager.configuration().dockSide();

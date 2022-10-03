@@ -10,27 +10,27 @@ import org.openqa.selenium.support.PageFactory;
 
 public class RegistrationPage {
 
-    public static String ERR_MESSAGE_XPATH = "//li[contains(text(),'%s')]";
+    public static String ERR_MESSAGE_XPATH = "//div[contains(text(),'%s')]";
 
     WebDriver driver;
     int waitTime = 0;
 
-    @FindBy(id="Input_Email")
+    @FindBy(id="firstname")
+    private WebElement inputFirstname;
+
+    @FindBy(id="lastname")
+    private WebElement inputLastname;
+
+    @FindBy(id="email_address")
     private WebElement inputEmail;
 
-    @FindBy(id="Input_Password")
+    @FindBy(id="password")
     private WebElement inputPassword;
 
-    @FindBy(id="Input_ConfirmPassword")
-    private WebElement inputConfirmPassword;
+    @FindBy(id="password-confirmation")
+    private WebElement inputPasswordConfirmation;
 
-    @FindBy(id="Input_Name")
-    private WebElement inputName;
-
-    @FindBy(id="Input_DOB")
-    private WebElement inputDate;
-
-    @FindBy(xpath = "//button[contains(text(),'Register')]")
+    @FindBy(xpath = "//button[contains(@class,'submit')]")
     private WebElement btnRegister;
 
     public RegistrationPage(WebDriver driver, int waitTime){
@@ -39,35 +39,35 @@ public class RegistrationPage {
         PageFactory.initElements(driver, this);
     }
 
-    public void enterUsername(String email){
-        inputEmail.sendKeys(email);
+    public void enterFirstName(String firstName){
+        inputFirstname.sendKeys(firstName);
+    }
+
+    public void enterLastName(String lastName){
+        inputLastname.sendKeys(lastName);
     }
 
     public void enterPassword(String password){
         inputPassword.sendKeys(password);
     }
 
+
     public void confirmPassword(String password){
-        inputConfirmPassword.sendKeys(password);
+        inputPasswordConfirmation.sendKeys(password);
     }
 
-    public void enterFullName(String name){
-        inputName.sendKeys(name);
+    public void enterEmail(String email){
+        inputEmail.sendKeys(email);
     }
 
-    public void enterBirthDate(String date){
-        //inputDate.sendKeys(date);
-        Actions actions = new Actions(driver);
-        actions.click(inputDate).sendKeys(date).build().perform();
-    }
 
     public void clickRegisterBtn(){
         btnRegister.click();
     }
 
     public boolean isUserRegistered(){
-        WebElement logOut = driver.findElement(By.id("logout"));
-        return logOut.isDisplayed();
+        WebElement successMsg = driver.findElement(By.xpath("//div[contains(@class,'message-success success message')]"));
+        return successMsg.isDisplayed();
     }
 
     public boolean isErrorMessageShown(String message){

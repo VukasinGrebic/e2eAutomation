@@ -2,6 +2,7 @@ package com.e2e;
 
 import com.e2e.model.TestUser;
 import com.e2e.pages.authentication.RegistrationPage;
+import com.e2e.utilities.FrontActionsUtil;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -9,27 +10,35 @@ import org.testng.annotations.Test;
 public class RegistrationTest extends TestBase {
 
     RegistrationPage registerPage;
-    String registrationUrl = "http://wagner.wang/Identity/Account/Register";
+
+    String registrationUrl = "https://magento.softwaretestingboard.com/customer/account/create/";
     public static TestUser testUser;
-    String username = "test003@example.com";
-    String password = "Demo!1234";
-    String name = "Demo";
-    String birthDate = "01/01/1999";
+
+    String firstName = "Names";
+
+    String lastName = "LNames";
+
+    String email = "test478@gmail.com";
+    String password = "Pw82738sd";
+
+
+
 
     @Test(priority = 2,
             enabled = true,
             description = "Successful user account registration")
-    public void testRegister_Success(){
+    public void testRegister_Success()  {
 
-        testUser = new TestUser(username,password, name, birthDate);
+        testUser = new TestUser(firstName,lastName,email,password);
         registerPage = new RegistrationPage(driver, waitTime);
+
         driver.get(registrationUrl);
 
-        registerPage.enterUsername(testUser.getUsername());
+        registerPage.enterFirstName(testUser.getFirstName());
+        registerPage.enterLastName(testUser.getLastName());
+        registerPage.enterEmail(testUser.getEmail());
         registerPage.enterPassword(testUser.getPassword());
         registerPage.confirmPassword(testUser.getPassword());
-        registerPage.enterFullName(testUser.getName());
-        registerPage.enterBirthDate(testUser.getBirthDate());
         registerPage.clickRegisterBtn();
 
         Assert.assertTrue(registerPage.isUserRegistered());
@@ -39,17 +48,17 @@ public class RegistrationTest extends TestBase {
             enabled = true,
             dataProvider = "invalidRegistrationData",
             description = "Unsuccessful user account registration")
-    public void testRegister_Failed(String description, String username, String password, String fullName, String birthDate, String errMessage){
+    public void testRegister_Failed(String description, String firstName, String lastName, String email, String password, String errMessage){
 
         registerPage = new RegistrationPage(driver, waitTime);
         driver.get(registrationUrl);
 
-        registerPage.enterUsername(username);
+        registerPage.enterFirstName(firstName);
+        registerPage.enterLastName(lastName);
+        registerPage.enterEmail(email);
         registerPage.enterPassword(password);
         registerPage.confirmPassword(password);
-        registerPage.enterFullName(fullName);
-        registerPage.enterBirthDate(birthDate);
-        // For demo purposes, slow down here to see results on page
+//         For demo purposes, slow down here to see results on page
         if(DEMO){ try { Thread.sleep(demoWait); } catch (InterruptedException e) { e.printStackTrace(); } }
         registerPage.clickRegisterBtn();
 
@@ -61,11 +70,19 @@ public class RegistrationTest extends TestBase {
     @DataProvider(name = "invalidRegistrationData")
     public Object[][] invalidRegistrationData(){
         Object[][] data = {
-                {"Missing email", "", "Demo!1234", "Demo", "01/01/1999", "The Email field is required."},
-                {"Missing password", "trainer@example.com", "", "Demo", "01/01/1999", "The Password field is required."},
-                {"Missing full name", "trainer@example.com", "Demo!1234", "", "01/01/1999", "The Full name field is required."},
-                {"Missing birth date", "trainer@example.com", "Demo!1234", "Demo", "", "The Birth Date field is required."}
+                {"Missing firstName", "", "LNames", "test90@mail.com", "ksajdka2", "This is a required field."},
+                {"Missing lastName", "Fnames", "", "teskl@mail.com", "jkasjdkn", "This is a required field."},
+                {"Missing email", "Fname", "Lnamess", "", "jksajdkn29", "This is a required field."},
+                {"Missing password", "Fnamesd", "Lnamom", "testm@mail.com", "", "This is a required field."}
         };
         return data;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPassword() {
+        return password;
     }
 }
