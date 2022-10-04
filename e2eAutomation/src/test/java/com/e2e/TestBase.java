@@ -41,11 +41,16 @@ public abstract class TestBase {
 
     @BeforeSuite(alwaysRun = true)
     public void suiteSetup() {
+        waitTime = ConfigurationManager.configuration().waitTime();
         String browserName = ConfigurationManager.configuration().browser();
         driver = DriverManager.createInstance(browserName);
+        driver.manage().window().maximize();
+        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(5));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 
         wait = new WebDriverWait(driver, Duration.ofSeconds(ConfigurationManager.configuration().waitTime()));
-        waitTime = ConfigurationManager.configuration().waitTime();
+
+
 
         if (dockingAllowed) DriverManager.dockBrowserWindow(dockSide);
     }

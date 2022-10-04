@@ -16,6 +16,7 @@ public class CheckOutPage {
     public static String ERR_MESSAGE_XPATH = "//p[contains(text(),'%s')]";
 
     WebDriver driver;
+
     WebDriverWait wait;
     int waitTime = 5;
 
@@ -90,13 +91,13 @@ public class CheckOutPage {
     }
 
     public void selectSize (int index) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(waitTime));
         wait.until(ExpectedConditions.elementToBeClickable(getSize(index)));
         getSize(index).click();
     }
 
     public void selectSize () {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(waitTime));
         wait.until(ExpectedConditions.elementToBeClickable(size));
         size.click();
     }
@@ -106,7 +107,7 @@ public class CheckOutPage {
     }
 
     public void clickProceedToCheckoutButton () {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(waitTime));
         wait.until(ExpectedConditions.elementToBeClickable(proceedToCheckoutButton));
         proceedToCheckoutButton.click();
     }
@@ -156,6 +157,8 @@ public class CheckOutPage {
     }
 
     public void clickPlaceOrder () {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(waitTime));
+        wait.until(ExpectedConditions.elementToBeClickable(placeOrder));
         placeOrder.click();
     }
 

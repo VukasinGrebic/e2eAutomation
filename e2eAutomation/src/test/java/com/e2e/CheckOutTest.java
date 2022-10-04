@@ -67,8 +67,6 @@ public class CheckOutTest extends TestBase {
 
         driver.get(cartUrl);
         checkoutPage.clickProceedToCheckoutButton();
-        Thread.sleep(5000);
-//        frontActionsUtil.waitForElement(checkoutPage.getShippingMethods(1));
          if (!checkoutPage.addressPresent.isDisplayed()) {
             checkoutPage.enterFirstName(fName);
             checkoutPage.enterLastName(lName);
@@ -83,7 +81,6 @@ public class CheckOutTest extends TestBase {
         checkoutPage.clickNext();
         Thread.sleep(5000);
         checkoutPage.clickPlaceOrder();
-        Thread.sleep(5000);
         Assert.assertTrue(checkoutPage.isOrdered(msg));
 
 
