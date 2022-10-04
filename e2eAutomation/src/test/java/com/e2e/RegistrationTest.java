@@ -14,12 +14,12 @@ public class RegistrationTest extends TestBase {
     String registrationUrl = "https://magento.softwaretestingboard.com/customer/account/create/";
     public static TestUser testUser;
 
-    String firstName = "Names";
+    String firstName = "Namek";
 
-    String lastName = "LNames";
+    String lastName = "LNamek";
 
-    String email = "test478@gmail.com";
-    String password = "Pw82738sd";
+    String email = "test333@gmail.com";
+    String password = "Pw82k38sd";
 
 
 

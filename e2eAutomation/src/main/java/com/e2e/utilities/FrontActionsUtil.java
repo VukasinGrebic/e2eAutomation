@@ -5,11 +5,18 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 /**
  * The Actions API utility class - common domain situations which requires action API to be performed
  */
 public class FrontActionsUtil {
+
+    protected WebDriver driver;
+    protected WebDriverWait wait;
 
     /**
      * Click on control using Actions API
@@ -67,6 +74,11 @@ public class FrontActionsUtil {
 
     public static void clickOnElementByJS(WebDriver driver, WebElement element){
         ((JavascriptExecutor) driver).executeScript("arguments[0].click(true);", element);
+    }
+
+    public void waitForElement(WebElement element) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        wait.until(ExpectedConditions.elementToBeClickable(element));
     }
 
 }
