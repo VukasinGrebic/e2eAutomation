@@ -1,5 +1,6 @@
 package com.e2e.pages.shop;
 
+import com.e2e.utilities.SeleniumUtilities;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -13,7 +14,8 @@ import java.time.Duration;
 import java.util.ArrayList;
 
 public class CheckOutPage {
-    public static String ERR_MESSAGE_XPATH = "//p[contains(text(),'%s')]";
+    public static String MESSAGE_XPATH = "//p[contains(text(),'%s')]";
+    public static String ERR_MESSAGE_XPATH = "//span[contains(text(),'%s')]";
 
     WebDriver driver;
 
@@ -50,7 +52,7 @@ public class CheckOutPage {
     @FindBy(name = "telephone")
     private WebElement phone;
 
-    @FindBy(xpath = "//span[contains(text(),'Place Order')]")
+    @FindBy(xpath = "//button[contains(@title, 'Place Order')]")
     private WebElement placeOrder;
 
     @FindBy(xpath = "//div[@class='product-add-form']//div[@class='swatch-option text']")
@@ -80,8 +82,9 @@ public class CheckOutPage {
         return chooseShippingMethod.get(index);
     }
 
-    public CheckOutPage(WebDriver driver, int waitTime) {
+    public CheckOutPage(WebDriver driver, WebDriverWait wait, int waitTime) {
         this.driver = driver;
+        this.wait = wait;
         this.waitTime = waitTime;
         PageFactory.initElements(driver, this);
     }
@@ -91,13 +94,11 @@ public class CheckOutPage {
     }
 
     public void selectSize (int index) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(waitTime));
         wait.until(ExpectedConditions.elementToBeClickable(getSize(index)));
         getSize(index).click();
     }
 
     public void selectSize () {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(waitTime));
         wait.until(ExpectedConditions.elementToBeClickable(size));
         size.click();
     }
@@ -107,7 +108,6 @@ public class CheckOutPage {
     }
 
     public void clickProceedToCheckoutButton () {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(waitTime));
         wait.until(ExpectedConditions.elementToBeClickable(proceedToCheckoutButton));
         proceedToCheckoutButton.click();
     }
@@ -127,10 +127,12 @@ public class CheckOutPage {
     }
 
     public void enterStreet (String streetA) {
+        streetAddress.clear();
         streetAddress.sendKeys(streetA);
     }
 
     public void enterCity (String homeCity) {
+        city.clear();
         city.sendKeys(homeCity);
     }
 
@@ -140,6 +142,7 @@ public class CheckOutPage {
     }
 
     public void enterZip (String zipCode) {
+        zip.clear();
         zip.sendKeys(zipCode);
     }
 
@@ -148,7 +151,13 @@ public class CheckOutPage {
         dropdownCountry.selectByVisibleText(country);
     }
 
+    public void selectCountryBlank(int index) {
+        Select dropdownCountry = new Select(driver.findElement(By.name("country_id")));
+        dropdownCountry.selectByIndex(index);
+    }
+
     public void enterPhone (String phoneNumber) {
+        phone.clear();
         phone.sendKeys(phoneNumber);
     }
 
@@ -157,7 +166,6 @@ public class CheckOutPage {
     }
 
     public void clickPlaceOrder () {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(waitTime));
         wait.until(ExpectedConditions.elementToBeClickable(placeOrder));
         placeOrder.click();
     }
@@ -167,7 +175,13 @@ public class CheckOutPage {
     }
 
     public boolean isOrdered(String message){
+        WebElement error = driver.findElement(By.xpath(String.format(MESSAGE_XPATH, message)));
+        return error.isDisplayed();
+    }
+
+    public boolean isErrorMessageShown(String message){
         WebElement error = driver.findElement(By.xpath(String.format(ERR_MESSAGE_XPATH, message)));
+        SeleniumUtilities.highlightControl(error, driver);
         return error.isDisplayed();
     }
 }

@@ -18,8 +18,12 @@ public class RegistrationTest extends TestBase {
 
     String lastName = "LNamek";
 
-    String email = "test333@gmail.com";
+    String email = "test393@gmail.com";
     String password = "Pw82k38sd";
+
+    String email1 = "ksad@mail.com";
+
+    String password1 = "Test1234";
 
 
 
@@ -84,5 +88,13 @@ public class RegistrationTest extends TestBase {
 
     public String getPassword() {
         return password;
+    }
+
+    public String getEmail1() {
+        return email1;
+    }
+
+    public String getPassword1() {
+        return password1;
     }
 }
