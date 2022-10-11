@@ -3,13 +3,12 @@ package com.e2e;
 import com.e2e.config.ConfigurationManager;
 import com.e2e.driver.DriverManager;
 import org.apache.commons.io.FileUtils;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterSuite;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 
 import java.awt.*;
@@ -38,6 +37,13 @@ public abstract class TestBase {
 
     public static boolean dockingAllowed = ConfigurationManager.configuration().dockingAllowed();
     public static String dockSide = ConfigurationManager.configuration().dockSide();
+
+    @BeforeMethod(alwaysRun = true)
+    public void clearCacheAndCookies(){
+        driver.manage().deleteAllCookies();
+        driver.get("chrome://settings/clearBrowserData");
+        driver.findElement(By.xpath("//settings-ui")).sendKeys(Keys.ENTER);
+    }
 
     @BeforeSuite(alwaysRun = true)
     public void suiteSetup() {
