@@ -1,5 +1,6 @@
 package com.e2e.pages.authentication;
 
+import com.e2e.utilities.SeleniumUtilities;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -55,6 +56,7 @@ public class LoginPage {
 
     public boolean isErrorMessageShown(String message){
         WebElement error = driver.findElement(By.xpath(String.format(ERR_MESSAGE_XPATH, message)));
+        SeleniumUtilities.highlightControl(error, driver);
         return error.isDisplayed();
     }
 

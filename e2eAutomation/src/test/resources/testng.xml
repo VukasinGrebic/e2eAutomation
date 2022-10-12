@@ -5,7 +5,7 @@
         <classes>
             <class name="com.e2e.RegistrationTest" />
             <class name="com.e2e.LoginTest" />
-            <class name="com.e2e.ManageStudentTest" />
+            <class name="com.e2e.CheckOutTest" />
         </classes>
     </test>
 </suite>
