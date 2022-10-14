@@ -33,7 +33,7 @@ public abstract class TestBase {
 
     protected static WebDriver driver;
     protected static WebDriverWait wait;
-    protected int waitTime = 5;
+    protected int waitTime = 5000;
 
     public static boolean dockingAllowed = ConfigurationManager.configuration().dockingAllowed();
     public static String dockSide = ConfigurationManager.configuration().dockSide();

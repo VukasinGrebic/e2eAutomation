@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
@@ -76,9 +77,19 @@ public class FrontActionsUtil {
         ((JavascriptExecutor) driver).executeScript("arguments[0].click(true);", element);
     }
 
-    public void waitForElement(WebElement element) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+    public static void waitForElement(WebElement element, WebDriver driver, int waitTime) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(waitTime));
         wait.until(ExpectedConditions.elementToBeClickable(element));
+    }
+
+    public static void selectElementByVisibleText(WebElement element,String text){
+        Select select = new Select(element);
+        select.selectByVisibleText(text);
+    }
+
+    public static void selectElementByIndex(WebElement element,int index){
+        Select select = new Select(element);
+        select.selectByIndex(index);
     }
 
 }

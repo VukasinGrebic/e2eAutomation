@@ -17,16 +17,16 @@ public class LoginPage {
 
     WebDriver driver;
     WebDriverWait wait;
-    int waitTime = 5;
+    int waitTime = 5000;
 
     @FindBy(id = "email")
-    private WebElement inputEmail;
+    private WebElement loc_txtEmail;
 
     @FindBy(id = "pass")
-    private WebElement inputPassword;
+    private WebElement loc_txtPassword;
 
     @FindBy(xpath = "//button[contains(@class,'action login primary')]")
-    private WebElement loginButton;
+    private WebElement loc_btnLogin;
 
     public LoginPage(WebDriver driver, int waitTime){
         this.driver = driver;
@@ -37,16 +37,16 @@ public class LoginPage {
 
 
     public void enterUsername(String email){
-        inputEmail.sendKeys(email);
+        loc_txtEmail.sendKeys(email);
     }
 
     public void enterPassword(String password){
-        inputPassword.sendKeys(password);
+        loc_txtPassword.sendKeys(password);
     }
 
 
     public void clickLoginBtn(){
-        loginButton.click();
+        loc_btnLogin.click();
     }
 
     public boolean isUserLogged(){
@@ -58,11 +58,6 @@ public class LoginPage {
         WebElement error = driver.findElement(By.xpath(String.format(ERR_MESSAGE_XPATH, message)));
         SeleniumUtilities.highlightControl(error, driver);
         return error.isDisplayed();
-    }
-
-    public void waitForElement(WebElement element) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-        wait.until(ExpectedConditions.visibilityOf(element));
     }
 
 }

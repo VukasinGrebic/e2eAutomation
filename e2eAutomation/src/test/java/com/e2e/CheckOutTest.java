@@ -69,7 +69,7 @@ public class CheckOutTest extends TestBase {
 
         driver.get(cartUrl);
         checkoutPage.clickProceedToCheckoutButton();
-         if (!checkoutPage.addressPresent.isDisplayed()) {
+         if (!checkoutPage.loc_lbAddressPresent.isDisplayed()) {
             checkoutPage.enterFirstName(fName);
             checkoutPage.enterLastName(lName);
             checkoutPage.enterStreet(street);

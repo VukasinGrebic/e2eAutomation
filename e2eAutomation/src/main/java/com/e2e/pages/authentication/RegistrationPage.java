@@ -4,7 +4,6 @@ import com.e2e.utilities.SeleniumUtilities;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
@@ -16,22 +15,22 @@ public class RegistrationPage {
     int waitTime = 0;
 
     @FindBy(id="firstname")
-    private WebElement inputFirstname;
+    private WebElement loc_txtFirstname;
 
     @FindBy(id="lastname")
-    private WebElement inputLastname;
+    private WebElement loc_txtLastname;
 
     @FindBy(id="email_address")
-    private WebElement inputEmail;
+    private WebElement loc_txtEmail;
 
     @FindBy(id="password")
-    private WebElement inputPassword;
+    private WebElement loc_txtPassword;
 
     @FindBy(id="password-confirmation")
-    private WebElement inputPasswordConfirmation;
+    private WebElement loc_txtPasswordConfirmation;
 
     @FindBy(xpath = "//button[contains(@class,'submit')]")
-    private WebElement btnRegister;
+    private WebElement loc_btnRegister;
 
     public RegistrationPage(WebDriver driver, int waitTime){
         this.driver = driver;
@@ -40,29 +39,29 @@ public class RegistrationPage {
     }
 
     public void enterFirstName(String firstName){
-        inputFirstname.sendKeys(firstName);
+        loc_txtFirstname.sendKeys(firstName);
     }
 
     public void enterLastName(String lastName){
-        inputLastname.sendKeys(lastName);
+        loc_txtLastname.sendKeys(lastName);
     }
 
     public void enterPassword(String password){
-        inputPassword.sendKeys(password);
+        loc_txtPassword.sendKeys(password);
     }
 
 
     public void confirmPassword(String password){
-        inputPasswordConfirmation.sendKeys(password);
+        loc_txtPasswordConfirmation.sendKeys(password);
     }
 
     public void enterEmail(String email){
-        inputEmail.sendKeys(email);
+        loc_txtEmail.sendKeys(email);
     }
 
 
     public void clickRegisterBtn(){
-        btnRegister.click();
+        loc_btnRegister.click();
     }
 
     public boolean isUserRegistered(){
